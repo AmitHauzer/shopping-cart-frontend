@@ -9,7 +9,7 @@ function App() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8000/products/')
+    fetch('https://shoppingcart-tluz.onrender.com/products/')
       .then((response) => response.json())
       .then((data) => {
         setProducts(data)
