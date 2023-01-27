@@ -24,7 +24,6 @@ function App() {
 
 
       <Products products={products} />
-      {/* {products.map(p => <div>{p.name}</div>)} */}
 
 
     </>
