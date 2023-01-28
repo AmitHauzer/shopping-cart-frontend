@@ -1,6 +1,9 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Products from './components/Products';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Nav from './components/Nav';
+import Cart from './components/Cart';
 
 
 
@@ -20,12 +23,14 @@ function App() {
 
   return (
     <>
-      <h1>Hello</h1>
-
-
-      <Products products={products} />
-
-
+      <h1>Shop</h1>
+      <BrowserRouter>
+      <Nav/>
+        <Routes>
+          <Route path="/products" element={<Products products={products}/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
