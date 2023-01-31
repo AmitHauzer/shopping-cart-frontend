@@ -1,8 +1,12 @@
 import React from 'react'
+import CartItem from './CartItem'
 
-function Cart() {
+function Cart({ cartitems }) {
   return (
-    <div>Cart</div>
+    <div>
+      <h1>Cart</h1>
+      {cartitems.map(item => <CartItem key={item.id} item={item} />)}
+    </div>
   )
 }
 
