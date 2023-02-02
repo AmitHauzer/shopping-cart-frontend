@@ -1,10 +1,12 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import Products from './components/Products';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Nav from './components/Nav';
 import Cart from './components/Cart';
 import Home from './components/Home';
+
 
 
 
