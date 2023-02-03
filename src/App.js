@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <h1>Shop</h1>
+      <h1>EasyShop</h1>
       <BrowserRouter>
         <Nav />
         <Routes>
