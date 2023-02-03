@@ -25,7 +25,10 @@ function App() {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
+  }, [])
 
+
+  useEffect(() => {
     fetch('http://localhost:8000/cart/cartitems/1/')
       .then((response) => response.json())
       .then((allCartitems) => {
