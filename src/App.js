@@ -25,7 +25,10 @@ function App() {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
+  }, [])
 
+
+  useEffect(() => {
     fetch('http://localhost:8000/cart/cartitems/1/')
       .then((response) => response.json())
       .then((allCartitems) => {
@@ -37,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1>Shop</h1>
+      <h1>EasyShop</h1>
       <BrowserRouter>
         <Nav />
         <Routes>
