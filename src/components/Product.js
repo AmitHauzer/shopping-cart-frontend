@@ -42,11 +42,11 @@ function Product({ product, onRefresh, exist, cartId }) {
 
     return (
         <Col>
-            <Card style={{ width: '18rem' }} class="card shadow-sm">
+            <Card style={{ width: '18rem' }} className="card shadow-sm">
                 <Card.Img variant="top" height="290px" src={'http://localhost:8000/static' + product.image} alt={product.name} />
                 <Card.Body>
 
-                    <Card.Title>{product.name}{exist && <span class="badge text-bg-success float-end">In The Cart</span>}</Card.Title>
+                    <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end">In The Cart</span>}</Card.Title>
                     <Card.Text>
                         {product.description}
                     </Card.Text>
