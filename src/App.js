@@ -14,9 +14,16 @@ import Home from './components/Home';
 function App() {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
-  // const [userCart, setUserCart] = useState()
+  const [cartId, setCartId] = useState(1)
 
-
+  function onRefresh() {
+    fetch(`http://localhost:8000/cart/cartitems/${cartId}/`)
+      .then((response) => response.json())
+      .then((allCartitems) => {
+        setCartItems(allCartitems)
+        console.log(`CartItems: ${cartItems}`)
+      })
+  }
 
   useEffect(() => {
     fetch('http://localhost:8000/products/')
@@ -25,16 +32,8 @@ function App() {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
-  }, [])
 
-
-  useEffect(() => {
-    fetch('http://localhost:8000/cart/cartitems/1/')
-      .then((response) => response.json())
-      .then((allCartitems) => {
-        setCartItems(allCartitems)
-        console.log(`CartItems: ${cartItems}`)
-      })
+    onRefresh() // get the cart items.
   }, [])
 
 
@@ -45,7 +44,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path="/products" element={<Products products={products} />} />
+          <Route path="/products" element={<Products products={products} onRefresh={onRefresh} cartItems={cartItems} cartId={cartId} />} />
           <Route path='/cart' element={<Cart cartitems={cartItems} />} />
         </Routes>
       </BrowserRouter>

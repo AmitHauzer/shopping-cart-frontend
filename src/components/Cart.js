@@ -21,7 +21,7 @@ function Cart({ cartitems }) {
 
             </thead>
             <tbody>
-              {cartitems.map(item => <CartItem key={item.id} item={item} />)}
+              {cartitems.map((item, index) => <CartItem key={item.id} item={item} index={index} />)}
             </tbody>
           </Table>
         </div>
