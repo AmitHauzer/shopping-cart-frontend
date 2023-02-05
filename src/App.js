@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import Products from './components/Products';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Nav from './components/Nav';
 import Cart from './components/Cart';
 import Home from './components/Home';
+import { MainHeader } from './components/MainHeader';
 
 
 
@@ -39,9 +39,10 @@ function App() {
 
   return (
     <>
-      <h1>EasyShop</h1>
+
+
       <BrowserRouter>
-        <Nav />
+        <MainHeader index={cartItems.length} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/products" element={<Products products={products} getCartItems={getCartItems} cartItems={cartItems} cartId={cartId} />} />
