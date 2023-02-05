@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { FaShekelSign } from 'react-icons/fa';
 
 
 
@@ -61,7 +62,7 @@ function Product({ product, getCartItems, exist, cartId }) {
                             <Button variant="primary" type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
                         </form>}
                 </Card.Body>
-                <Card.Footer><small className="float-end text-muted">{product.price}</small></Card.Footer>
+                <Card.Footer><small className="float-end text-muted">{product.price} <FaShekelSign size={'10px'} /></small></Card.Footer>
             </Card>
         </Col >
     )
