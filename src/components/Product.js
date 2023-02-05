@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 
 
 
-function Product({ product, onRefresh, exist, cartId }) {
+function Product({ product, getCartItems, exist, cartId }) {
     const [quantity, setQuantity] = useState(1)
 
     const addToCart = async () => {
@@ -22,7 +22,7 @@ function Product({ product, onRefresh, exist, cartId }) {
             body: JSON.stringify(item)
         })
         console.log('added to cart.')
-        onRefresh()
+        getCartItems()
     }
 
     const removeItemFromCart = async () => {
@@ -36,7 +36,7 @@ function Product({ product, onRefresh, exist, cartId }) {
             body: JSON.stringify(item)
         })
         console.log('remove.')
-        onRefresh()
+        getCartItems()
     }
 
 

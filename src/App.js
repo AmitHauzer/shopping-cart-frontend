@@ -16,7 +16,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
 
-  function onRefresh() {
+  const getCartItems = () => {
     fetch(`http://localhost:8000/cart/cartitems/${cartId}/`)
       .then((response) => response.json())
       .then((allCartitems) => {
@@ -33,7 +33,7 @@ function App() {
         console.log(`Products: ${products}`)
       })
 
-    onRefresh() // get the cart items.
+    getCartItems()
   }, [])
 
 
@@ -44,7 +44,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path="/products" element={<Products products={products} onRefresh={onRefresh} cartItems={cartItems} cartId={cartId} />} />
+          <Route path="/products" element={<Products products={products} getCartItems={getCartItems} cartItems={cartItems} cartId={cartId} />} />
           <Route path='/cart' element={<Cart cartitems={cartItems} />} />
         </Routes>
       </BrowserRouter>
