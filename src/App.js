@@ -2,9 +2,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import Products from './components/Products';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Cart from './components/Cart';
-import Home from './components/Home';
 import { MainHeader } from './components/MainHeader';
 
 
@@ -39,12 +38,10 @@ function App() {
 
   return (
     <>
-
-
       <BrowserRouter>
         <MainHeader index={cartItems.length} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Navigate to='/products' />} />
           <Route path="/products" element={<Products products={products} getCartItems={getCartItems} cartItems={cartItems} cartId={cartId} />} />
           <Route path='/cart' element={<Cart cartitems={cartItems} />} />
         </Routes>
