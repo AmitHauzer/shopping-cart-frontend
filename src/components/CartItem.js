@@ -14,7 +14,7 @@ function CartItem({ item, index, removeItemFromCart, cartId }) {
       <td>{item.product.description}</td>
       <td>{item.product.price}</td>
       <td>{item.quantity}</td>
-      <td>{item.product.price * item.quantity}</td>
+      <td>{parseFloat(item.product.price * item.quantity).toFixed(2)}</td>
       <td><MdDelete size={20} onClick={() => removeItemFromCart({ product: item.product, cartId: cartId })} /></td>
     </tr>
   )
