@@ -35,6 +35,19 @@ function App() {
     getCartItems()
   }, [])
 
+  const removeItemFromCart = async ({ product, cartId }) => {
+    let item = {
+      product: product.id,
+      cart: cartId,
+    }
+    await fetch(`http://localhost:8000/cart/cartitems/1/delete/`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item)
+    })
+    console.log('remove.')
+    getCartItems()
+  }
 
   return (
     <>
@@ -42,8 +55,8 @@ function App() {
         <MainHeader index={cartItems.length} />
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
-          <Route path="/products" element={<Products products={products} getCartItems={getCartItems} cartItems={cartItems} cartId={cartId} />} />
-          <Route path='/cart' element={<Cart cartitems={cartItems} />} />
+          <Route path="/products" element={<Products products={products} getCartItems={getCartItems} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} />} />
+          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} cartitems={cartItems} cartId={cartId} />} />
         </Routes>
       </BrowserRouter>
     </>

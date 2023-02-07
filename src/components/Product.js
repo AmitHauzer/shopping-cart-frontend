@@ -7,7 +7,7 @@ import { FaShekelSign } from 'react-icons/fa';
 
 
 
-function Product({ product, getCartItems, exist, cartId }) {
+function Product({ product, getCartItems, exist, cartId, removeItemFromCart }) {
     const [quantity, setQuantity] = useState(1)
 
     const addToCart = async () => {
@@ -26,20 +26,6 @@ function Product({ product, getCartItems, exist, cartId }) {
         getCartItems()
     }
 
-    const removeItemFromCart = async () => {
-        let item = {
-            product: product.id,
-            cart: cartId,
-        }
-        await fetch(`http://localhost:8000/cart/cartitems/1/delete/`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(item)
-        })
-        console.log('remove.')
-        getCartItems()
-    }
-
 
     return (
         <Col>
@@ -52,7 +38,7 @@ function Product({ product, getCartItems, exist, cartId }) {
                         {product.description}
                     </Card.Text>
 
-                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={removeItemFromCart}>Remove</Button></div> :
+                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ product, cartId })}>Remove</Button></div> :
                         <form className='form-inline'>
 
                             <div className='form-group'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Table } from 'react-bootstrap'
 import CartItem from './CartItem'
 
-function Cart({ cartitems }) {
+function Cart({ cartitems, removeItemFromCart, cartId }) {
   return (
     <Container>
       <Row>
@@ -12,16 +12,18 @@ function Cart({ cartitems }) {
             <thead>
               <tr>
                 <th></th>
+                <th></th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th></th>
               </tr>
 
             </thead>
             <tbody>
-              {cartitems.map((item, index) => <CartItem key={item.id} item={item} index={index} />)}
+              {cartitems.map((item, index) => <CartItem key={item.id} item={item} index={index} removeItemFromCart={removeItemFromCart} cartId={cartId} />)}
             </tbody>
           </Table>
         </div>
