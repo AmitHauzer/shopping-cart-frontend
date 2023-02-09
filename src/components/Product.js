@@ -7,7 +7,7 @@ import { FaShekelSign } from 'react-icons/fa';
 
 
 
-function Product({ product, getCartItems, exist, cartId, removeItemFromCart }) {
+function Product({ product, getCartItems, exist, cartId, removeItemFromCart, path }) {
     const [quantity, setQuantity] = useState(1)
 
     const addToCart = async () => {
@@ -17,7 +17,7 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart }) {
             quantity
         }
 
-        await fetch(`http://localhost:8000/cart/cartitems/1/add/`, {
+        await fetch(`${path}/cart/cartitems/add/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item)
@@ -30,7 +30,7 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart }) {
     return (
         <Col>
             <Card style={{ width: '18rem' }} className="card shadow-sm">
-                <Card.Img variant="top" height="290px" src={'http://localhost:8000/static' + product.image} alt={product.name} />
+                <Card.Img variant="top" height="290px" src={`${path}/static` + product.image} alt={product.name} />
                 <Card.Body>
 
                     <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end">In The Cart</span>}</Card.Title>

@@ -11,12 +11,13 @@ import { MainHeader } from './components/MainHeader';
 
 
 function App() {
+  const path = "http://localhost:8000"
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
 
   const getCartItems = () => {
-    fetch(`http://localhost:8000/cart/cartitems/${cartId}/`)
+    fetch(`${path}/cart/${cartId}/cartitems/`)
       .then((response) => response.json())
       .then((allCartitems) => {
         setCartItems(allCartitems)
@@ -25,13 +26,12 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('http://localhost:8000/products/')
+    fetch(`${path}/products/`)
       .then((response) => response.json())
       .then((allProducts) => {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
-
     getCartItems()
   }, [])
 
@@ -40,7 +40,7 @@ function App() {
       product: product.id,
       cart: cartId,
     }
-    await fetch(`http://localhost:8000/cart/cartitems/1/delete/`, {
+    await fetch(`${path}/cart/cartitems/delete/`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item)
@@ -55,8 +55,8 @@ function App() {
         <MainHeader index={cartItems.length} />
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
-          <Route path="/products" element={<Products products={products} getCartItems={getCartItems} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} />} />
-          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} cartitems={cartItems} cartId={cartId} />} />
+          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} path={path} />} />
+          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} cartitems={cartItems} cartId={cartId} path={path} />} />
         </Routes>
       </BrowserRouter>
     </>
