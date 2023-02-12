@@ -16,6 +16,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
 
+
   const getCartItems = () => {
     fetch(`${path}/cart/${cartId}/cartitems/`)
       .then((response) => response.json())
@@ -24,6 +25,7 @@ function App() {
         console.log(`CartItems: ${cartItems}`)
       })
   }
+
 
   useEffect(() => {
     fetch(`${path}/products/`)
@@ -34,6 +36,7 @@ function App() {
       })
     getCartItems()
   }, [])
+
 
   const removeItemFromCart = async ({ product, cartId }) => {
     let item = {
@@ -49,6 +52,7 @@ function App() {
     getCartItems()
   }
 
+
   return (
     <>
       <BrowserRouter>
@@ -56,7 +60,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
           <Route path='/products' element={<Products products={products} getCartItems={getCartItems} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} path={path} />} />
-          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} cartitems={cartItems} cartId={cartId} path={path} />} />
+          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartitems={cartItems} cartId={cartId} path={path} />} />
         </Routes>
       </BrowserRouter>
     </>
