@@ -17,7 +17,7 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart, pat
             quantity
         }
 
-        await fetch(`${path}/cart/cartitems/add/`, {
+        await fetch(`${path}/cart/${cartId}/cartitems/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item)
@@ -38,7 +38,7 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart, pat
                         {product.description}
                     </Card.Text>
 
-                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ product, cartId })}>Remove</Button></div> :
+                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ productId: product.id, cartId: cartId })}>Remove</Button></div> :
                         <form className='form-inline'>
 
                             <div className='form-group'>

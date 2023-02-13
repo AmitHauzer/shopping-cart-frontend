@@ -38,15 +38,12 @@ function App() {
   }, [])
 
 
-  const removeItemFromCart = async ({ product, cartId }) => {
-    let item = {
-      product: product.id,
-      cart: cartId,
-    }
-    await fetch(`${path}/cart/cartitems/delete/`, {
+  const removeItemFromCart = async ({ productId, cartId }) => {
+
+    await fetch(`${path}/cart/${cartId}/cartitems/${productId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(item)
+      body: JSON.stringify()
     })
     console.log('remove.')
     getCartItems()

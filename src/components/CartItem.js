@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdDelete } from 'react-icons/md';
 
 
 function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems }) {
   const [quantity, setQuantity] = useState(item.quantity)
 
-  const updateCartItem = async () => {
-    console.log(`quantity: ${quantity}`)
+  useEffect(() => {
+    updateCartItem(quantity)
+  }, [quantity])
+
+  const updateCartItem = async (newQuantity) => {
+    console.log(`quantity: ${newQuantity}`)
     let cartitem = {
       product: item.product.id,
       paid_status: item.paid_status,
       cart: cartId,
-      quantity
+      quantity: newQuantity
     }
 
-    await fetch(`${path}/cart/cartitems/update/`, {
+    await fetch(`${path}/cart/${cartId}/cartitems/${item.product.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cartitem)
@@ -35,12 +39,11 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       <td>{item.product.price}</td>
       <td>
         <form>
-          {item.quantity}
-          <input className='from-control' type='number' min={1} max={50} value={quantity} onClick={updateCartItem} onChange={e => setQuantity(parseInt(e.target.value))} />
+          <input className='from-control' type='number' min={1} max={50} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
         </form>
       </td>
       <td>{parseFloat(item.product.price * item.quantity).toFixed(2)}</td>
-      <td><MdDelete size={20} onClick={() => removeItemFromCart({ product: item.product, cartId: cartId })} /></td>
+      <td><MdDelete size={20} onClick={() => removeItemFromCart({ productId: item.product.id, cartId: cartId })} /></td>
     </tr>
   )
 }
