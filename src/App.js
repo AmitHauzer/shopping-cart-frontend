@@ -22,7 +22,6 @@ function App() {
       .then((response) => response.json())
       .then((allCartitems) => {
         setCartItems(allCartitems)
-        console.log(`CartItems: ${cartItems}`)
       })
   }
 
@@ -45,7 +44,6 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify()
     })
-    console.log('remove.')
     getCartItems()
   }
 

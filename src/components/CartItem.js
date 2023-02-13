@@ -5,6 +5,8 @@ import { MdDelete } from 'react-icons/md';
 function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems }) {
   const [quantity, setQuantity] = useState(item.quantity)
 
+
+  // useEffect runs when the quantity is updated. 
   useEffect(() => {
     updateCartItem(quantity)
   }, [quantity])
@@ -23,7 +25,6 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cartitem)
     })
-    console.log(`Update: ${cartitem}`)
     getCartItems()
   }
 

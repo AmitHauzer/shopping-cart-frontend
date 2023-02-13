@@ -20,7 +20,6 @@ function Cart({ cartitems, removeItemFromCart, cartId, path, getCartItems }) {
                 <th>Total</th>
                 <th></th>
               </tr>
-
             </thead>
             <tbody>
               {cartitems.map((item, index) => <CartItem key={item.id} item={item} index={index} removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartId={cartId} path={path} />)}
