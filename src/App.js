@@ -11,39 +11,62 @@ import { MainHeader } from './components/MainHeader';
 
 
 function App() {
+  const path = "http://localhost:8000"
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
 
+
   const getCartItems = () => {
-    fetch(`http://localhost:8000/cart/cartitems/${cartId}/`)
+    fetch(`${path}/cart/${cartId}/cartitems/`)
       .then((response) => response.json())
       .then((allCartitems) => {
         setCartItems(allCartitems)
-        console.log(`CartItems: ${cartItems}`)
       })
   }
 
-  useEffect(() => {
-    fetch('http://localhost:8000/products/')
+  const getProducts = () => {
+    fetch(`${path}/products/`)
       .then((response) => response.json())
       .then((allProducts) => {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
+  }
 
+  useEffect(() => {
+    getProducts()
     getCartItems()
   }, [])
 
 
+  const removeItemFromCart = async ({ productId, cartId }) => {
+    await fetch(`${path}/cart/${cartId}/cartitems/${productId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify()
+    })
+    getCartItems()
+  }
+
+
+  const searchProducts = async (query) => {
+    await fetch(`${path}/products/search/?search=${query}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((res) => { setProducts(res) })
+  }
+
   return (
     <>
       <BrowserRouter>
-        <MainHeader index={cartItems.length} />
+        <MainHeader index={cartItems.length} path={path} searchProducts={searchProducts} getProducts={getProducts} />
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
-          <Route path="/products" element={<Products products={products} getCartItems={getCartItems} cartItems={cartItems} cartId={cartId} />} />
-          <Route path='/cart' element={<Cart cartitems={cartItems} />} />
+          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} getProducts={getProducts} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} path={path} />} />
+          <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartitems={cartItems} cartId={cartId} path={path} />} />
         </Routes>
       </BrowserRouter>
     </>
