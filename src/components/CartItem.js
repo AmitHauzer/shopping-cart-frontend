@@ -3,23 +3,24 @@ import { MdDelete } from 'react-icons/md';
 
 
 function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems }) {
-  const [quantity, setQuantity] = useState()
+  const [quantity, setQuantity] = useState(item.quantity)
 
 
   // useEffect runs when the quantity is updated. 
   useEffect(() => {
-    updateCartItem(quantity)
+    if (quantity !== item.quantity) {
+      updateCartItem(quantity)
+    }
   }, [quantity])
 
+
   const updateCartItem = async (newQuantity) => {
-    console.log(`quantity: ${newQuantity}`)
     let cartitem = {
       product: item.product.id,
       paid_status: item.paid_status,
       cart: cartId,
       quantity: newQuantity
     }
-
     await fetch(`${path}/cart/${cartId}/cartitems/${item.product.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -40,7 +41,7 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       <td>{item.product.price}</td>
       <td>
         <form>
-          <input className='from-control' type='number' min={1} max={50} value={item.quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
+          <input className='from-control' type='number' min={1} max={50} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
         </form>
       </td>
       <td>{parseFloat(item.product.price * item.quantity).toFixed(2)}</td>
