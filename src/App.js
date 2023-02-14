@@ -25,20 +25,22 @@ function App() {
       })
   }
 
-
-  useEffect(() => {
+  const getProducts = () => {
     fetch(`${path}/products/`)
       .then((response) => response.json())
       .then((allProducts) => {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
+  }
+
+  useEffect(() => {
+    getProducts()
     getCartItems()
   }, [])
 
 
   const removeItemFromCart = async ({ productId, cartId }) => {
-
     await fetch(`${path}/cart/${cartId}/cartitems/${productId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -48,13 +50,22 @@ function App() {
   }
 
 
+  const searchProducts = async (query) => {
+    await fetch(`${path}/products/search/?search=${query}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((res) => { setProducts(res) })
+  }
+
   return (
     <>
       <BrowserRouter>
-        <MainHeader index={cartItems.length} />
+        <MainHeader index={cartItems.length} path={path} searchProducts={searchProducts} getProducts={getProducts} />
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
-          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} path={path} />} />
+          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} getProducts={getProducts} removeItemFromCart={removeItemFromCart} cartItems={cartItems} cartId={cartId} path={path} />} />
           <Route path='/cart' element={<Cart removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartitems={cartItems} cartId={cartId} path={path} />} />
         </Routes>
       </BrowserRouter>

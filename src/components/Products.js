@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Product from "./Product"
 
 
 function Products({ products, getCartItems, cartItems, cartId, removeItemFromCart, path }) {
+
     return (
         <Container>
             <h1>Products:</h1>
