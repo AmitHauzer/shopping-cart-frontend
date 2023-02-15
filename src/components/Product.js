@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { FaShekelSign } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 
 
@@ -35,10 +36,10 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart, pat
 
                     <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end">In The Cart</span>}</Card.Title>
                     <Card.Text>
-                        {product.description}
+                        {product.description || <br />}
                     </Card.Text>
 
-                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ productId: product.id, cartId: cartId })}>Remove</Button></div> :
+                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ productId: product.id, cartId: cartId })}><MdDelete /></Button></div> :
                         <form className='form-inline'>
 
                             <div className='form-group'>

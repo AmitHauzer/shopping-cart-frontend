@@ -11,7 +11,7 @@ function Nav({ index, searchProducts, getProducts }) {
     <nav className='shadow-sm'>
       <ul>
         <li><Link to='/products' onClick={getProducts}>Products</Link></li>
-        <li ><Link to='/cart'><BsCart3 className='icon' /><Badge bg="warning">{index}</Badge></Link></li>
+        <li ><Link to='/cart'><BsCart3 className='icon' /><Badge >{index}</Badge></Link></li>
       </ul>
 
       <div className="right" style={{ width: '20%' }}>

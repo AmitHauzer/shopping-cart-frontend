@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Product from "./Product"
 
@@ -7,7 +6,7 @@ function Products({ products, getCartItems, cartItems, cartId, removeItemFromCar
     const isEmpty = products.length === 0;
     return (
         <Container>
-            <h1>Products:</h1>
+            <h1>Products</h1>
             {
                 isEmpty ?
                     <Row sm={1} md={1} >
