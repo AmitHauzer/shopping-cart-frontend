@@ -1,13 +1,14 @@
 import React from 'react'
 import { Container, Row, Table } from 'react-bootstrap'
 import CartItem from './CartItem'
+import { BsCart3 } from 'react-icons/bs';
 
 function Cart({ cartitems, removeItemFromCart, cartId, path, getCartItems }) {
   return (
     <Container>
       <Row>
         <div>
-          <h1>Cart</h1>
+          <h1>Cart <BsCart3 /></h1>
           <Table>
             <thead>
               <tr>

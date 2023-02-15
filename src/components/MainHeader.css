@@ -10,7 +10,8 @@
 }
 
 .navbar header {
-    background-color: #f63232;
+    /* background-color: #f63232; */
+    background-image: linear-gradient(#2b5b89, #033c73 60%, #03386c);
     padding: 5px 1px 1px 5px;
     text-align: center;
     /* position: fixed; */

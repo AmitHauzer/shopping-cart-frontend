@@ -17,12 +17,12 @@ const Search = ({ searchProducts }) => {
 
 
     <Form onSubmit={handleSubmit}>
-      <Row >
+      <Row>
         <Col xs={8} >
-          <Form.Control type='text' placeholder="Search.." name="search" value={query} onChange={e => setQuery(e.target.value)} />
+          <Form.Control size="sm" type='search' placeholder="Search.." name="search" value={query} onChange={e => setQuery(e.target.value)} />
         </Col>
         <Col style={{ paddingLeft: "0px" }}>
-          <Button variant="secondary" type="submit"><BiSearchAlt2 /></Button>
+          <Button size="sm" variant="secondary" type="submit"><BiSearchAlt2 /></Button>
         </Col>
       </Row>
     </Form >
