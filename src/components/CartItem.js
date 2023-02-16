@@ -27,9 +27,18 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       body: JSON.stringify(cartitem)
     })
     getCartItems()
+    console.log('test')
   }
 
 
+  const hendleKeyDown = (event) => {
+    // Solves the page refresh.
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('enter')
+    }
+
+  }
   return (
     <tr >
       <th>{index + 1}</th>
@@ -41,7 +50,7 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       <td>{item.product.price}</td>
       <td>
         <form>
-          <input className='from-control' type='number' min={1} max={50} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
+          <input className='from-control' type='number' min={1} max={50} value={quantity} onKeyDown={hendleKeyDown} onChange={e => setQuantity(parseInt(e.target.value))} />
         </form>
       </td>
       <td>{parseFloat(item.product.price * item.quantity).toFixed(2)}</td>
