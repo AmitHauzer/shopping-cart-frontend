@@ -6,8 +6,8 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
   const [quantity, setQuantity] = useState(item.quantity)
 
 
-  // useEffect runs when the quantity is updated. 
   useEffect(() => {
+    // useEffect runs when the quantity is updated. 
     if (quantity !== item.quantity) {
       updateCartItem(quantity)
     }
@@ -27,7 +27,6 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
       body: JSON.stringify(cartitem)
     })
     getCartItems()
-    console.log('test')
   }
 
 
@@ -35,7 +34,6 @@ function CartItem({ item, index, removeItemFromCart, cartId, path, getCartItems 
     // Solves the page refresh.
     if (event.key === 'Enter') {
       event.preventDefault();
-      console.log('enter')
     }
 
   }
