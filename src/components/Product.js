@@ -3,12 +3,12 @@ import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { FaShekelSign } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
+import { DeleteItem } from './DeleteItem';
 
 
 
 
-function Product({ product, getCartItems, exist, cartId, removeItemFromCart, path }) {
+function Product({ product, getCartItems, exist, cartId, path }) {
     const [quantity, setQuantity] = useState(1)
 
     const addToCart = async () => {
@@ -39,14 +39,14 @@ function Product({ product, getCartItems, exist, cartId, removeItemFromCart, pat
                         {product.description || <br />}
                     </Card.Text>
 
-                    {exist ? <div><br /><br /><Button variant='outline-danger' type='button' size="sm" onClick={() => removeItemFromCart({ productId: product.id, cartId: cartId })}><MdDelete /></Button></div> :
+                    {exist ? <div><br /><br /><DeleteItem className='float-end' getCartItems={getCartItems} path={path} itemId={product.id} cartId={cartId} /> </div> :
                         <form className='form-inline'>
 
                             <div className='form-group'>
                                 <label>Quantity:</label>
                                 <input className='from-control float-end' type='number' min={1} max={50} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
                             </div><br />
-                            <Button variant="primary" type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
+                            <Button className='float-end' variant="primary" type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
                         </form>}
                 </Card.Body>
                 <Card.Footer><small className="float-end text-muted">{product.price} <FaShekelSign size={'10px'} /></small></Card.Footer>
