@@ -1,32 +1,19 @@
-import React from 'react'
-import { Container, Row, Table } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import CartItem from './CartItem'
 import { BsCart3 } from 'react-icons/bs';
+import { CartSummary } from './CartSummary';
 
 function Cart({ cartitems, removeItemFromCart, cartId, path, getCartItems }) {
   return (
-    <Container>
+    <Container >
       <Row>
-        <div>
-          <h1>Cart <BsCart3 /></h1>
-          <Table>
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartitems.map((item, index) => <CartItem key={item.id} item={item} index={index} removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartId={cartId} path={path} />)}
-            </tbody>
-          </Table>
-        </div>
+        <h1 style={{ textAlign: 'center' }}>Cart <BsCart3 /></h1>
+        <Col sm={8}>
+          {cartitems.map((item) => <CartItem key={item.id} item={item} removeItemFromCart={removeItemFromCart} getCartItems={getCartItems} cartId={cartId} path={path} />)}
+        </Col>
+        <Col sm={4}>
+          <CartSummary cartitems={cartitems} />
+        </Col>
       </Row>
     </Container>
   )
