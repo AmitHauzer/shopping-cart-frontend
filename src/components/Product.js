@@ -34,7 +34,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                 <Card.Img variant="top" height="290px" src={`${path}/static` + product.image} alt={product.name} />
                 <Card.Body>
 
-                    <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end">In The Cart</span>}</Card.Title>
+                    <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end shadow">In The Cart</span>}</Card.Title>
                     <Card.Text>
                         {product.description || <br />}
                     </Card.Text>
@@ -46,7 +46,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                                 <label>Quantity:</label>
                                 <input className='from-control float-end' type='number' min={1} max={50} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} />
                             </div><br />
-                            <Button className='float-end' variant="primary" type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
+                            <Button className='Button float-end ' type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
                         </form>}
                 </Card.Body>
                 <Card.Footer><small className="float-end text-muted">{product.price} <FaShekelSign size={'10px'} /></small></Card.Footer>
