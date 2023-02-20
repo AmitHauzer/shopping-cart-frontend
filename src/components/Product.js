@@ -49,7 +49,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                             <Button className='Button float-end ' type='button' size="sm" onClick={addToCart}>Add to Cart</Button>
                         </form>}
                 </Card.Body>
-                <Card.Footer><small className="float-end text-muted">{product.price} <FaShekelSign size={'10px'} /></small></Card.Footer>
+                <Card.Footer><small className="float-end text-muted"><FaShekelSign size={'10px'} /> {product.price}</small></Card.Footer>
             </Card>
         </Col >
     )

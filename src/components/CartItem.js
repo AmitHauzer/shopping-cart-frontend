@@ -51,7 +51,7 @@ function CartItem({ item, cartId, path, getCartItems }) {
           <input id='quantity' className='from-control ms-3' type='number' min={1} max={50} value={quantity} onKeyDown={hendleKeyDown} onChange={e => setQuantity(parseInt(e.target.value))} />
         </form>
         <br />
-        <div className='fw-bold'>{item.product.price} <FaShekelSign size={'10px'} /></div>
+        <div className='fw-bold'><FaShekelSign size={'10px'} /> {item.product.price}</div>
       </Col>
     </Row >
   )
