@@ -1,0 +1,32 @@
+.navbar {
+    position: fixed;
+
+    width: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding-top: 0px;
+
+}
+
+.navbar header {
+    /* background-color: #f63232; */
+    background-image: linear-gradient(#2b5b89, #033c73 60%, #03386c);
+    padding: 5px 1px 1px 5px;
+    text-align: center;
+    /* position: fixed; */
+    width: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+}
+
+.navbar h5 {
+    color: white;
+    border: 4px solid white;
+    padding: 6px 12px 10px 12px;
+    display: inline-block;
+    border-radius: 36px;
+
+}

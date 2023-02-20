@@ -32,7 +32,16 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.Button {
+  background-image: linear-gradient(#2b5b89, #0a5ca9 60%, #03386c);
+}
+
+.Button:hover {
+  background-image: linear-gradient(#002f5a, #2b5b89 60%, #03386c) !important;
 }
