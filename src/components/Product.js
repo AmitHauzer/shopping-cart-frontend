@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -13,6 +13,11 @@ import { LoadingAddToCart } from './Loading/LoadingAddToCart';
 function Product({ product, getCartItems, exist, cartId, path }) {
     const [quantity, setQuantity] = useState(1)
     const [isLoadingAddToCart, setIsLoadingAddToCart] = useState(false)
+    const [isExist, setIsExist] = useState()
+
+    useEffect(() => {
+        setIsExist(exist)
+    }, [exist])
 
     const addToCart = async () => {
         setIsLoadingAddToCart(true)
@@ -29,6 +34,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
         console.log('added to cart.')
         getCartItems()
         setIsLoadingAddToCart(false)
+        setIsExist(true)
     }
 
 
@@ -42,7 +48,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                         {isLoadingAddToCart ?
                             <span className="badge text-bg-success float-end shadow px-0">< LoadingAddToCart /></span>
                             :
-                            (exist && <span className="badge text-bg-success float-end shadow">< BsCart3 /></span>)
+                            (isExist && <span className="badge text-bg-success float-end shadow">< BsCart3 /></span>)
                         }
 
                     </Card.Title>
@@ -50,7 +56,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                         {product.description || <br />}
                     </Card.Text>
 
-                    {exist ? <div><br /><br /><DeleteItem className='float-end' getCartItems={getCartItems} path={path} itemId={product.id} cartId={cartId} /> </div> :
+                    {isExist ? <div><br /><br /><DeleteItem className='float-end' getCartItems={getCartItems} path={path} itemId={product.id} cartId={cartId} /> </div> :
                         <form className='form-inline'>
 
                             <div className='form-group'>
