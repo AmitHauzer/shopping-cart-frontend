@@ -9,30 +9,31 @@ import { PageNotFound } from './components/PageNotFound';
 
 
 
-
-
 function App() {
   const path = "https://shoppingcart-tluz.onrender.com"
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
+  const [isLoading, setIsLoaing] = useState(false)
 
 
-  const getCartItems = () => {
-    fetch(`${path}/cart/${cartId}/cartitems/`)
+  const getCartItems = async () => {
+    await fetch(`${path}/cart/${cartId}/cartitems/`)
       .then((response) => response.json())
       .then((allCartitems) => {
         setCartItems(allCartitems)
       })
   }
 
-  const getProducts = () => {
-    fetch(`${path}/products/`)
+  const getProducts = async () => {
+    setIsLoaing(true)
+    await fetch(`${path}/products/`)
       .then((response) => response.json())
       .then((allProducts) => {
         setProducts(allProducts)
         console.log(`Products: ${products}`)
       })
+      .then(() => setIsLoaing(false))
   }
 
   useEffect(() => {
@@ -56,7 +57,7 @@ function App() {
         <MainHeader index={cartItems.length} path={path} searchProducts={searchProducts} getProducts={getProducts} />
         <Routes>
           <Route path='/' element={<Navigate to='/products' />} />
-          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} getProducts={getProducts} cartItems={cartItems} cartId={cartId} path={path} />} />
+          <Route path='/products' element={<Products products={products} getCartItems={getCartItems} getProducts={getProducts} cartItems={cartItems} cartId={cartId} path={path} isLoading={isLoading} />} />
           <Route path='/cart' element={<Cart getCartItems={getCartItems} cartitems={cartItems} cartId={cartId} path={path} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
