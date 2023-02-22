@@ -4,37 +4,48 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { FaShekelSign } from 'react-icons/fa';
 import { DeleteItem } from './DeleteItem';
+import { BsCart3 } from 'react-icons/bs';
+import { LoadingAddToCart } from './Loading/LoadingAddToCart';
 
 
 
 
 function Product({ product, getCartItems, exist, cartId, path }) {
     const [quantity, setQuantity] = useState(1)
+    const [isLoadingAddToCart, setIsLoadingAddToCart] = useState(false)
 
     const addToCart = async () => {
+        setIsLoadingAddToCart(true)
         let item = {
             product: product.id,
             cart: cartId,
             quantity
         }
-
         await fetch(`${path}/cart/${cartId}/cartitems/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item)
-        })
+        }).then()
         console.log('added to cart.')
         getCartItems()
+        setIsLoadingAddToCart(false)
     }
 
 
     return (
         <Col>
             <Card style={{ width: '18rem' }} className="card shadow-sm">
-                <Card.Img variant="top" height="290px" src={`${path}/static` + product.image} alt={product.name} />
+                <Card.Img className='p-3' variant="top" height="290px" src={`${path}/static` + product.image} alt={product.name} />
                 <Card.Body>
 
-                    <Card.Title>{product.name}{exist && <span className="badge text-bg-success float-end shadow">In The Cart</span>}</Card.Title>
+                    <Card.Title>{product.name}
+                        {isLoadingAddToCart ?
+                            <span className="badge text-bg-success float-end shadow px-0">< LoadingAddToCart /></span>
+                            :
+                            (exist && <span className="badge text-bg-success float-end shadow">< BsCart3 /></span>)
+                        }
+
+                    </Card.Title>
                     <Card.Text>
                         {product.description || <br />}
                     </Card.Text>
@@ -50,6 +61,7 @@ function Product({ product, getCartItems, exist, cartId, path }) {
                         </form>}
                 </Card.Body>
                 <Card.Footer><small className="float-end text-muted"><FaShekelSign size={'10px'} /> {product.price}</small></Card.Footer>
+
             </Card>
         </Col >
     )
