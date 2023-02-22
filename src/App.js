@@ -10,7 +10,7 @@ import { PageNotFound } from './components/PageNotFound';
 
 
 function App() {
-  const path = "http://localhost:8000"
+  const path = "https://shoppingcart-tluz.onrender.com"
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartId, setCartId] = useState(1)
